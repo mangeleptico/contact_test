@@ -1,0 +1,22 @@
+<mat-spinner *ngIf="spinner"></mat-spinner>
+<div class='auth-content' *ngIf="!spinner">
+  <h2 class="title">Iniciar sesión</h2>
+    <form class="auth-form" [formGroup]="form">
+        <mat-form-field appearance="outline" class="input-form">
+          <mat-label>Correo electrónico</mat-label>
+          <input type="email" autocomplete="on" formControlName="email"  matInput>
+          <mat-icon color='primary' matSuffix>person</mat-icon>
+          <mat-error *ngIf="form.get('email')?.hasError('required')">Este campo es requerido</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="input-form">
+          <mat-label>Contraseña</mat-label>
+          <input type="password" autocomplete="off" formControlName="password"  matInput >
+          <mat-icon color='primary' matSuffix>lock</mat-icon>
+          <mat-error *ngIf="form.get('password')?.hasError('required')">Este campo es requerido</mat-error>
+        </mat-form-field>
+      </form>
+      <div class="auth-form">
+        <button class="button-form" (click)="logIn()" mat-raised-button color="primary">Ingresar</button>
+      </div>
+</div>

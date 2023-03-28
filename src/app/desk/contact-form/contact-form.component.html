@@ -1,0 +1,59 @@
+<div class="actions">
+  <button mat-raised-button color="accent" (click)="logOut()">Cerrar sesión</button>
+</div>
+<form [formGroup]="contact" (submit)="submit()">
+  <div class="form-contact">
+    <mat-form-field appearance="outline">
+    <mat-label>Nombres</mat-label>
+    <input matInput type="text" formControlName="names">
+    <mat-error *ngIf="contact.get('names').hasError('required') && contact.get('names').touched">
+      El campo Nombres es requerido
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Apellidos</mat-label>
+    <input matInput type="text" formControlName="last_names">
+    <mat-error *ngIf="contact.get('last_names').hasError('required') && contact.get('last_names').touched">
+      El campo Apellidos es requerido
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Correo</mat-label>
+    <input matInput type="email" formControlName="email" placeholder="ejemplo@test.com">
+    <mat-error *ngIf="contact.get('email').hasError('required') && contact.get('email').touched">
+      El campo Correo es requerido
+    </mat-error>
+    <mat-error *ngIf="contact.get('email').hasError('email') && contact.get('email').touched">
+      Correo es inválido
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Teléfono</mat-label>
+    <input matInput type="text" formControlName="phone">
+    <mat-error *ngIf="contact.get('phone').hasError('required') && contact.get('phone').touched">
+      El campo Teléfono es requerido
+    </mat-error>
+    <mat-error *ngIf="contact.get('phone').hasError('pattern') && contact.get('phone').touched">
+      Teléfono inválido, debe tener 10 dígitos
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Identificación</mat-label>
+    <input matInput type="text" formControlName="id">
+    <mat-error *ngIf="contact.get('id').hasError('required') && contact.get('id').touched">
+      El campo Identificación es requerido
+    </mat-error>
+  </mat-form-field>
+  </div>
+
+  <div class="actions">
+    <button mat-raised-button color="primary" type="submit">Enviar</button>
+  </div>
+</form>
+<mat-spinner *ngIf="spinner"></mat-spinner>
+<app-contact-table [newContact]="this.contact.value" [formSubmitted] = "submited" (resetForm) = "resetForm($event)"></app-contact-table>
+
